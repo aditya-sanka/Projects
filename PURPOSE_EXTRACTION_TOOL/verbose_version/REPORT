@@ -1,0 +1,88 @@
+					Puropose Extraction Tool
+
+About:
+	Every artifact is created to serve a specific purpose which can be called as its primary purpose. 
+	The project aims at extracting primary purpose of artifacts from web corpus.
+	Primary purpose can also be called as the utility of the artifact. 
+	  
+Introduction:
+	We have implemented a system that extracts purpose information from web corpus using surface text patterns. 
+	The system aims at extracting purpose information from sentences in which the purpose is explicitly mentioned. 
+	We studied the data for patterns that indicate the presence of purpose information. 
+	
+	These patterns could be effectively represented using various methods. 
+	Regular expressions are effective in pattern matching with strings. 	. 
+	The combination of Regular Expression and POS tags is called a surface text pattern.
+ 
+	These patterns are matched against the data extracted for a given artifact and its purpose is identified.
+
+Our approach:
+
+	The extraction of primary purpose of an artifact involves two stages:
+		1.Information Retrieval 
+		2.Purpose extraction
+
+Information Retrieval:
+	When an artifact is given as input, the definitions are extracted from selected web dictionaries. 
+	We observed that most of the definitions for an artifact contained its purpose information.
+
+        Several artifacts were given to a generic search engine and the first thousand results were stored. 
+	Most of these results did not contain any purpose information. 
+	Even when found the information was implicit in most of the cases. 
+	We observed that when the information was explicit, it was limited to few sentences. 
+	
+	We selected domain independent online dictionaries so that the system will work for all domains. 
+
+	Web Scraping techniques were used and scripts were developed for each of our selected online resources. 
+	These scripts are independent of each other and run in a parallel environment. 
+	These results are used in later stages of the system for purpose extraction.
+
+Purpose Extraction: 	
+	A surface text pattern is a combination of Regular expression and POS tags. 
+
+	We initially formed a training corpus of artifacts. 
+	This corpus was studied for the presence of information and patterns were MANUALLY formed. 
+	These patterns are represented using surface text patterns. 
+ 
+	Each of the patterns are matched against the entire corpus.
+	These results were used to find the coverage and accuracy of that respective pattern. 
+	
+	Coverage is the percentage of artifacts for which we have result. 
+	Accuracy is the percentage of correct results in total for a given pattern. 
+	Similar patterns were grouped together and sorted according to their accuracies.   
+
+	For example when 
+		“Toothpaste is a paste for cleaning teeth“ 
+			is matched against 
+		“a DT \w*? NN for IN \w*? NN \w*? NN” 
+		the result would be “cleaning teeth”.
+
+	The extracted text data is tagged using a POS tagger. 
+	Each sentence is now matched against all groups of patterns. 
+	Once a match is found in a group we stop and move on to the next sentence in the corpus. 
+	We can observe that processing of each of the sentences is independent of other. 
+	So all these sentences are parsed in a parallel environment. 
+	 
+	We have also implemented a cache using simple caching techniques. 
+	This cache would consist of the final results of all the pre-processed artifacts. 
+	When we encounter an artifact that is already in the cache we just retrieve the result from cache. 
+
+Results :
+	Our entire corpus consists of a total of 110 artifacts. 
+	We divided it into 
+		training data 50 artifacts
+		testing data  60 artifacts
+
+
+	Coverage :  49/60	82%
+	Accuracy :  45/49       92%
+
+Future  Scope :   
+	The system cannot locate all the answers in a given sentence. 
+	The system is capable of capturing only one purpose term for a given sentence. 
+	For example we can only capture WRITING from “Pencil is used for writing as well as drawing”.     
+
+	Develop semi-supervised or unsupervised methods for generating the surface text patterns. 
+	
+	Future work includes identifying the associated participants of the action taking place 
+	and assigning proper semantic roles to them.

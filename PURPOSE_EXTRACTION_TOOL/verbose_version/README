@@ -1,0 +1,28 @@
+
+					PURPOSE EXTRACTION TOOL
+
+A detailed description of the report can found in "REPORT".
+
+We also used several python modules which are not part of the 
+base system.Dependencies can be installed using "INSTALL.sh".
+
+THE INSTALL SCRIPT WORKS ONLY FOR DEBIAN BASED SYSTEMS 
+	OR
+SYSTEMS WITH apt-get PACKAGE MANAGER.
+
+The script will need Natural Language Toolkit which can be found at http://nltk.org/install.html
+The script will install nltk modules and download all the related 
+data for the modules.
+
+Program can be run using "PURPOSE_EXTRACTION_TOOL.py"
+Usage :
+for a single artifact
+	./PURPOSE_EXTRACTION_TOOL.py pencil
+for download a batch of results
+	./PURPOSE_EXTRACTION_TOOL.py artifacts_list.txt
+	where artifacts_list.txt is a file containing the artifact names.
+
+The supporting code can be found in "CODES" directory.
+
+Once the program is run "cache" folder is created.We can find 
+results for all the given queries in "cache" folder.
